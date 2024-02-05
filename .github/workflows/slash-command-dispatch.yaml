@@ -12,3 +12,4 @@ jobs:
           token: ${{ secrets.PAT }}
           commands: example
           repository: wayn3r/slash-command-processor
+          issue-type: pull-request
