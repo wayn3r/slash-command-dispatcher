@@ -1,7 +1,7 @@
 name: Slash Command Dispatch
 on:
   issue_comment:
-    types: [created, edited]
+    types: [created]
 jobs:
   slashCommandDispatch:
     runs-on: ubuntu-latest
@@ -14,7 +14,8 @@ jobs:
           commands: example
           repository: wayn3r/slash-command-processor
           issue-type: pull-request
-          allow-edits: true
+          allow-edits: false
+          reactions: false
       - name: Edit comment with error message
         if: steps.scd.outputs.error-message
         uses: peter-evans/create-or-update-comment@v4
