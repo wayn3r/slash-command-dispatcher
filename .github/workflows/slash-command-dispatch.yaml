@@ -5,7 +5,7 @@ on:
 jobs:
   slashCommandDispatch:
     runs-on: ubuntu-latest
-    if: contains(github.event.issue.labels.*.name, 'deployed')
+    # if: contains(github.event.issue.labels.*.name, 'deployed')
     steps:
       - name: Slash Command Dispatch
         id: scd
