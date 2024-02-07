@@ -18,12 +18,9 @@ jobs:
           allow-edits: false
           reactions: false
       - name: Edit comment with error message
-        if: always()
+        if: steps.scd.outputs.error-message
         uses: peter-evans/create-or-update-comment@v4
         with:
-          issue-number: ${{ github.event.issue.number }}
-          comment-id: test-id
+          comment-id: ${{ github.event.comment.id }}
           body: |
-            > [!TIP]
-            > Test message on new message
             > ${{ steps.scd.outputs.error-message }}
