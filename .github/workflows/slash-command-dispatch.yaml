@@ -21,6 +21,7 @@ jobs:
         if: always()
         uses: peter-evans/create-or-update-comment@v4
         with:
+          issue-number: ${{ github.event.issue.number }}
           comment-id: test-id
           body: |
             > [!TIP]
