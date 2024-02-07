@@ -18,7 +18,7 @@ jobs:
           allow-edits: false
           reactions: false
       - name: Edit comment with error message
-        if: steps.scd.outputs.error-message
+        if: always()
         uses: peter-evans/create-or-update-comment@v4
         with:
           comment-id: test-id
