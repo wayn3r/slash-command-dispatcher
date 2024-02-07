@@ -21,6 +21,6 @@ jobs:
         if: steps.scd.outputs.error-message
         uses: peter-evans/create-or-update-comment@v4
         with:
-          comment-id: ${{ github.event.comment.id }}
+          comment-id: test-id
           body: |
             > ${{ steps.scd.outputs.error-message }}
