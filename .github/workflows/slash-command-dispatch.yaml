@@ -23,4 +23,6 @@ jobs:
         with:
           comment-id: test-id
           body: |
+            > [!TIP]
+            > Test message on new message
             > ${{ steps.scd.outputs.error-message }}
