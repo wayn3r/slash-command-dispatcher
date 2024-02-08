@@ -1,9 +1,9 @@
-name: Slash Command Dispatch
+name: Trigger Command on PR
 on:
   pull_request:
     types: [opened, reopened, synchronize]
 jobs:
-  slashCommandDispatch:
+  trigger_command:
     runs-on: ubuntu-latest
     # if: contains(github.event.issue.labels.*.name, 'deployed')
     steps:
@@ -13,7 +13,15 @@ jobs:
           token: ${{ secrets.PAT }}
           repo: wayn3r/slash-command-processor
           type: example-error-command
-          payload: '{ "github": { "payload": ${{ toJSON(github.event) }} } }'
+          payload: |
+            { 
+              "github": { 
+                "payload": { 
+                  "repository": ${{ toJSON(github.event.repository) }},
+                  "issue": ${{ toJSON(github.event.pull_request) }}
+                } 
+              } 
+            }
       - name: Edit comment with error message
         if: steps.scd.outputs.error-message
         uses: peter-evans/create-or-update-comment@v4
