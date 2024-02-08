@@ -1,0 +1,23 @@
+name: Slash Command Dispatch
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+jobs:
+  slashCommandDispatch:
+    runs-on: ubuntu-latest
+    # if: contains(github.event.issue.labels.*.name, 'deployed')
+    steps:
+      - name: Repository Dispatch
+        uses: myrotvorets/trigger-repository-dispatch-action@1.0.0
+        with:
+          token: ${{ secrets.PAT }}
+          repo: wayn3r/slash-command-processor
+          type: example-error-command
+          payload: '{ "github": { "payload": ${{ toJSON(github.event) }} } }'
+      - name: Edit comment with error message
+        if: steps.scd.outputs.error-message
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          comment-id: ${{ github.event.comment.id }}
+          body: |
+            > ${{ steps.scd.outputs.error-message }}
